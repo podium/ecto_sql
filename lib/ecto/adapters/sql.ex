@@ -656,9 +656,7 @@ defmodule Ecto.Adapters.SQL do
 
   @doc false
   def struct(adapter_meta, conn, sql, operation, source, params, values, on_conflict, returning, opts) do
-    cache_statement = "ecto_#{operation}_#{source}"
-
-    case query(adapter_meta, sql, values, [cache_statement: cache_statement] ++ opts) do
+    case query(adapter_meta, sql, values, opts) do
       {:ok, %{rows: nil, num_rows: 1}} ->
         {:ok, []}
 
